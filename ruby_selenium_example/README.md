@@ -8,8 +8,13 @@ Tested under ruby-2.6.7
 
 Install ruby - tested using ruby-2.6.7 
 
-Install webdriver:
+Install webdriver (library) and webdrivers (executables):
 
-`gem install selenium-webdriver`
+`gem install selenium-webdriver
+gem install webdrivers`
+
+Install minitest:
+
+`gem install minitest`
 
 
