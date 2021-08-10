@@ -7,7 +7,7 @@
 require 'minitest/autorun'
 require 'selenium-webdriver'
 require 'webdrivers'
-class WonderProxyTest < MiniTest::Unit::TestCase
+class WonderProxyTest < MiniTest::Test
   
   def setup 
     #----------------------------------------------
