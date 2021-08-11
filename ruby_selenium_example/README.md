@@ -10,8 +10,8 @@ Install ruby - tested using ruby-2.6.7
 
 Install webdriver (library) and webdrivers (executables):
 
-`gem install selenium-webdriver
-gem install webdrivers`
+`gem install selenium-webdriver`
+`gem install webdrivers`
 
 Install minitest:
 
