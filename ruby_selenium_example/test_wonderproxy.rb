@@ -47,7 +47,6 @@ class WonderProxyTest < MiniTest::Test
     link.click();
     assert((@browser.page_source.include? "Start localization testing today."),"Text should be signup page text after click");
     assert((@browser.page_source.include? "Get accurate results."),"Checkng additional signup text");
-     
   end
 
 
