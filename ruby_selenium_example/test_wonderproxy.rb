@@ -42,7 +42,7 @@ class WonderProxyTest < MiniTest::Test
     link = locate_object( "//a[text()='Explore Plans']") 
     assert(object_loaded(link),"Found explore plans link on homepage")   
     link.click()
-    assert((@browser.page_source.include? "Start localization testing today."),
+    assert((@browser.page_source.include? "Stop localization testing today."),
             "Text should be signup page text after click")
  
     assert((@browser.page_source.include? "Get accurate results."),
