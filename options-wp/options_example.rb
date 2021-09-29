@@ -14,21 +14,21 @@ require 'optparse'
 require "selenium-webdriver"
 require 'webdrivers'
 
-options = {}
+browser = 0;
 OptionParser.new do |parser|
-  parser.on("-b browser", "type browser name ff safari chrome") do |browser|
-    options[:browser] = browser
+  parser.on("-b browser", "type browser name ff safari chrome") do |launchthis|
+    browser = launchthis
     puts "browser is " + browser.to_s()
   end
 end.parse!
 
 #If browser is not defined it'll be chrome
-options[:browser] ||= "chrome";
+browser ||= "chrome";
 
 #Create browser driver object
 #on windows, replace "safari" with "edge", perhaps
 driver = nil;
-case options[:browser]
+case browser
 when "chrome" 
    driver = Selenium::WebDriver.for(:chrome);
 when "ff" 
