@@ -22,17 +22,18 @@ OptionParser.new do |parser|
   end
 end.parse!
 
-#If browser is not defined it'll be chrome; abort if invalid
+#If browser is not defined it'll be chrome
 options[:browser] ||= "chrome";
-options[:browser]=":"+options[:browser];
 
+#Create browser driver object
+#on windows, replace "safari" with "edge", perhaps
 driver = nil;
 case options[:browser]
-when ":chrome" 
+when "chrome" 
    driver = Selenium::WebDriver.for(:chrome);
-when ":ff" 
+when "ff" 
    driver = Selenium::WebDriver.for(:ff);
-when ":safari" 
+when "safari" 
    driver = Selenium::WebDriver.for(:safari);
 else
    abort("-b Browser must be in this list: chrome, ff, safari");
