@@ -29,14 +29,12 @@ browser ||= "chrome";
 #on windows, replace "safari" with "edge", perhaps
 driver = nil;
 case browser
-when "chrome" 
-   driver = Selenium::WebDriver.for(:chrome);
 when "ff" 
    driver = Selenium::WebDriver.for(:ff);
 when "safari" 
    driver = Selenium::WebDriver.for(:safari);
 else
-   abort("-b Browser must be in this list: chrome, ff, safari");
+   driver = Selemium::WebDriver.for(:chrome);
 end
 
 driver.navigate.to "https://www.wonderproxy.com";
