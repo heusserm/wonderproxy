@@ -1,0 +1,14 @@
+{
+  "name": "playwright-js",
+  "version": "0.0.0",
+  "description": "Apples and apples comparison sample for puppeteer vs playwright",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test --headed"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@playwright/test": "^1.16.3"
+  }
+}
