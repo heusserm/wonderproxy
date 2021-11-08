@@ -1,0 +1,54 @@
+
+
+- Puppeteer
+  - Maintained by: Chrome DevTools team + community
+  - NodeJS (Javascript/Typescript) only  
+  - Limited Cross Browser: Firefox is experimental, Safari may happen in the distant future.
+  - Puppeteer is focused on a richer Chromium test experience. 
+  - Puppeteer is fast, zero setup and developed alongside chromium, there is tight coupling between the puppeteer version and chrome version, this is a feature not a bug.
+  - Uses event drive architecture - which somehow translates to more robust tests and less "sleep(100)" calls
+    https://github.com/puppeteer/puppeteer#q-is-puppeteer-replacing-seleniumwebdriver
+  - Puppeteer generates "trusted" events by default:
+    - What does this mean
+      - https://github.com/puppeteer/puppeteer#q-whats-the-difference-between-a-trusted-and-untrusted-input-event
+    - This could be useful for various things
+      - bad stuff, faking a real user more completely
+      - Good stuff, better detection of fake trusted events.
+  - Bring your own test framework
+    - this allows integration into the teams chosen test framework
+    - less to learn in addition to the Puppeteer browser control api
+    - async operations can be problematic in some test frameworks  
+  - Video support may be a problem
+    - Uses Chromium and not Chrome so some codecs are missing
+    - Can use real chrome to navigate around this
+    - Also, it is desktop chrome so no HLS
+    - see: https://github.com/puppeteer/puppeteer#q-what-features-does-puppeteer-not-support
+  - Main Source: https://github.com/puppeteer/puppeteer
+    
+- Playwright
+  - Maintained by: Microsoft + community
+  - Language support for: NodeJS (Javascript/Typescript), Python, Java, .Net   
+  - Sources:
+    - https://playwright.dev/
+  - Supported browsers
+    - Chromium, Firefox and WebKit
+    - Safari is a Webkit browser so is covered 
+    - Has mobile emulation modes assisting in mobile testing
+      - https://playwright.dev/docs/emulation/
+      - *Note to Matt: this may be an interesting topic to explore*  
+    - https://playwright.dev/docs/why-playwright/#support-for-all-browsers
+  - Autowait
+    - https://playwright.dev/docs/actionability
+    - Playwright will check for actionability before interacting with an element
+    - This reduces the need to wait for elements and makes simpler and more reliable tests
+  - Test framework included
+    - Playwright includes a test framework. This makes for more consistency between teams using playwright and so more portability in acquired skill set.
+    - async is accounted for in the test framework 
+    - https://playwright.dev/docs/test-annotations  
+  - Network control and other enhanced capabilities
+    - Playwright is able to stub/mock network requests
+
+    - Playwright has access to out of process elements such as 
+      - iframes, native input events and "dark mode"
+        - this allows testing even more of all the things possibly allowing the ability to test deeper corner cases
+    - https://playwright.dev/docs/why-playwright/#powerful-automation-capabilities

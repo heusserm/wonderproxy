@@ -1,0 +1,16 @@
+{
+  "name": "puppeteer-js",
+  "version": "0.0.0",
+  "description": "Apples and apples comparision sample for puppeteer vs playwright",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.1.3",
+    "puppeteer": "^11.0.0"
+  }
+}
