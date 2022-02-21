@@ -16,7 +16,7 @@ def test_visit_location(browser, location):
     context = browser.new_context(proxy={
         "server": 'http://' + location['server'] + ':10000',
         "username": os.environ['PROXY_USER'],
-        "password": os.environ['PROXY_PASS']
+        "password": os.environ['PROXY_TOKEN']
     })
 
     # Create a page from the context and visit Google home:
