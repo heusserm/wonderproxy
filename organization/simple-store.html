@@ -1,0 +1,373 @@
+<html lang="en">
+<head>
+    <title>Sample system under test</title>
+    <!-- This is sample code for Playwright tests to work against, probably don't want to do it like this for reals -->
+    <!-- in fact you probably don't want to look much further -->
+
+    <!-- colors: https://coolors.co/ff6b35-f7c59f-efefd0-004e89-1a659e -->
+    <style>
+        :root {
+            --main-bg-color: #f7c59f;
+            --primary-bg: #efefd0;
+            --primary-text: #004e89;
+            --secondary-text: #f7c59f;
+            --secondary-bg: #1a659e;
+        }
+
+        body {
+            color: var(--primary-text);
+            background-color: var(--main-bg-color);
+        }
+
+        .menu-item {
+            background-color: #efefd0;
+            color: var(--primary-text);
+            margin: 3px;
+            padding: 8px;
+            text-decoration: none;
+            border-color: var(--primary-text);
+            border-style: solid;
+        }
+
+        .menu-container {
+            display: flex;
+        }
+
+        /* Catalog */
+        .catalog-item-container {
+            display: flex;
+            margin: 4px;
+        }
+
+        .catalog-item-description {
+            min-width: 10em;
+        }
+
+        .catalog-item-price {
+            min-width: 3em;
+        }
+
+
+        /* Cart */
+        .cart-item-container {
+            display: flex;
+            margin: 4px;
+        }
+
+        .cart-item-description {
+            min-width: 10em;
+        }
+
+        .cart-item-price {
+            min-width: 3em;
+        }
+
+        /* Checkout */
+        .checkout-item-container {
+            display: flex;
+            margin: 4px;
+        }
+
+        .checkout-item-description {
+            min-width: 10em;
+        }
+
+        .checkout-item-price {
+            min-width: 3em;
+        }
+
+        .checkout-item-quantity {
+            min-width: 3em;
+        }
+
+        .checkout-item-line-total {
+            min-width: 3em;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group label {
+            flex: none;
+            display: block;
+            width: 125px;
+            font-weight: bold;
+            font-size: 1em;
+        }
+        .form-group .input-control {
+            flex: 1 1 auto;
+            display: block;
+            margin-bottom: 10px;
+            margin-right: 8px;
+            padding: 4px;
+            margin-top: -1px;
+        }
+
+
+        .review-item {
+           padding: 4px;
+            margin-top: 6px;
+            margin-bottom: 6px;
+        }
+        .review-title {
+            font-weight: bold;
+            margin-bottom: -1px;
+
+        }
+        .review-content {
+            font-size: .95em;
+            margin-left: 3px;
+        }
+
+        .reviewer-name {
+            font-style: italic;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+<div class="menu-container">
+    <a class="menu-item" href="#catalog">Catalog</a><br/>
+    <a class="menu-item" href="#cart">Cart</a><br/>
+    <a class="menu-item" href="#checkout">Checkout</a><br/>
+    <!--<a class="menu-item" href="#shipping">Shipping</a><br/>-->
+    <a class="menu-item" href="#reviews">Reviews</a><br/>
+</div>
+
+<div id="catalog">
+    <div>product catalog</div>
+    <div id="catalog-items">catalog goes here</div>
+</div>
+<div id="cart">
+    <div>shopping cart</div>
+    <div id="cart-items">catalog goes here</div>
+    <div><button class="cart-checkout" onclick="goto('checkout')">checkout</button></div>
+</div>
+<div id="checkout">
+    <div>checkout</div>
+    <div id="checkout-detail">order confirmation information goes here</div>
+    <button class="checkout-confirm" onclick="goto('shipping')">Confirm Order</button>
+</div>
+<div id="shipping">
+    <div>shipping</div>
+    <div>enter address</div>
+    <div class="form-group">
+        <label>Name</label>
+        <input id="ship-name" value="" class="input-control"/>
+    </div>
+    <div class="form-group">
+        <label>Address Line 1</label>
+        <input id="ship-addr1" value="" class="input-control"/>
+    </div>
+    <div class="form-group">
+        <label>Address Line 2</label>
+        <input id="ship-addr2" value="" class="input-control"/>
+    </div>
+    <div class="form-group">
+        <label>City</label>
+        <input id="ship-city" value="" class="input-control"/>
+    </div>
+    <div class="form-group">
+        <label>State</label>
+        <input id="ship-state" value="" class="input-control"/>
+    </div>
+    <div class="form-group">
+        <label>Zip</label>
+        <input id="ship-zip" value="" class="input-control"/>
+    </div>
+    <button class="shipping-confirm" onclick="goto('done')">Complete Order</button>
+</div>
+<div id="reviews">
+    <div>reviews</div>
+    <div class="review-item">
+        <div class="review-title">Alternator (verified purchase)</div>
+        <div class="review-content">This is a great product, it alternately pushes then pulls the electrons which is just exactly what it should do.  In addition it has an integrated rectifier and regulator making it super convenient to hook up and use for myriad uses.</div>
+        <div class="reviewer-name">Hap P. Customer</div>
+    </div>
+    <div class="review-item">
+        <div class="review-title">Starter</div>
+        <div class="review-content">Works great fast shipping.</div>
+        <div class="reviewer-name">Anonymous Reviewer</div>
+    </div>
+    <div class="review-item">
+        <div class="review-title">Manifold</div>
+        <div class="review-content">It probably would work but I am incompetent and don't know how to put it on, so even though it is all my fault I feel compelled to leave a bad review because I am just that way.</div>
+        <div class="reviewer-name">Lay Z. Goof</div>
+    </div>
+    <div class="review-item">
+        <div class="review-title">Manifold</div>
+        <div class="review-content">Fits perfect, easy install, ignore the bad reviews this is the one you need, universal fit even works on vogon spacecraft thanks to this item construction on the interstellar bypass will resume after the poetry reading.</div>
+        <div class="reviewer-name">Al Ian Mechanic </div>
+    </div>
+</div>
+<div id="done">
+    <div>Thank you for your order it will be sent out post haste!</div>
+</div>
+</body>
+<script>
+  const catalog = {
+    items: [
+      {id: "1", description: 'alternator', quantityOnHand: 23, price: 95},
+      {id: "2", description: 'starter', quantityOnHand: 18, price: 130},
+      {id: "3", description: 'brake pad', quantityOnHand: 68, price: 30},
+      {id: "4", description: 'blinker fluid', quantityOnHand: 0, price: 10},
+      {id: "5", description: 'manifold', quantityOnHand: 1, price: 200},
+    ],
+    getItem: id => catalog.items.find(item => item.id === id),
+    render: () => {
+      // TODO: should use addEventListener instead but would need to figure out how to dynamically add it
+      const {params} = parseHash();
+      if (params && params.includes('item_id')) {
+        const item_id = params.split('=')[1];
+        const item = catalog.items.find(i => i.id === item_id);
+        const content = `
+        <div>You have ${cart.items.reduce((p, c) => c.quantity + p, 0)} items in your cart</div>
+        <div class="catalog-item-container">
+            <div class="catalog-item-price">$${item.price}</div>
+            <div class="catalog-item-description"><a class="catalog-link" onclick="showCurrentLocation()" href="simple-store.html#catalog?item_id=${item.id}">${item.description}</a></div>
+            <div class="catalog-item-quantity">qty:<input class="catalog-quantity" id="${item.id + 'qty'}" type="text" size="5"/></div>
+            <div class="catalog-item-add"><input type="button" class="catalog-add" value="Add to cart" onclick="cart.addItem(event, '${item.id}')"/></div>
+        </div>
+`;
+          document.getElementById('catalog-items').innerHTML = content;
+        return;
+      }
+      const catalogItems = catalog.items.map(item =>
+        `
+            <div class="catalog-item-container">
+                <div class="catalog-item-price">$${item.price}</div>
+                <div class="catalog-item-description"><a onclick="showCurrentLocation()" href="simple-store.html#catalog?item_id=${item.id}">${item.description}</a></div>
+            </div>
+          `
+      ).join('');
+
+      const content = `
+        <div>You have ${cart.items.reduce((p, c) => c.quantity + p, 0)} items in your cart</div>
+        ${catalogItems}
+      `;
+      document.getElementById('catalog-items').innerHTML = content;
+    }
+  };
+  const cart = {
+    items: [],
+    addItem: (event, itemId) => {
+      const quantityElement = document.getElementById(itemId + 'qty');
+      const quantity = parseInt(quantityElement.value, 10);
+      if (Number.isSafeInteger(quantity)) {
+        cart.items.push({itemId, quantity});
+        showCurrentLocation();
+      } else {
+        // TODO: show error message
+      }
+      window.location.hash = 'cart';
+    },
+    render: () => {
+      // TODO: should use addEventListener instead but would need to figure out how to dynamically add it
+      const cartItems = cart.items.map((item, index) => {
+          const catalogItem = catalog.getItem(item.itemId);
+          return `
+            <div class="cart-item-container">
+                <div class="cart-item-description">${catalogItem.description}</div>
+                <div class="cart-item-price">${catalogItem.price}</div>
+                <div class="cart-item-quantity"><input id="${item.id + 'qty'}" type="text" size="5" value="${item.quantity}"/></div>
+                <div class="cart-item-update"><input type="button" value="Update" onclick="cart.updateLine(event, ${index}, '${item.id}')"/></div>
+            </div>
+          `;
+        }
+      ).join('');
+      const content = `
+        <div>You have ${cart.items.reduce((p, c) => c.quantity + p, 0)} items in your cart</div>
+        ${cartItems}
+        <div>Total cost: $<span class="cart-total-cost">${cart.items.reduce((p, c) => (c.quantity * catalog.getItem(c.itemId).price) + p, 0)}</span></div>
+      `;
+      document.getElementById('cart-items').innerHTML = content;
+    }
+  };
+  const checkout = {
+    render: () => {
+      // TODO: should use addEventListener instead but would need to figure out how to dynamically add it
+      const cartItems = cart.items.map((item, index) => {
+          const catalogItem = catalog.getItem(item.itemId);
+          return `
+            <div class="checkout-item-container">
+                <div class="checkout-item-description">${catalogItem.description}</div>
+                <div class="checkout-item-price">${catalogItem.price}</div>
+                <div class="checkout-item-quantity">${item.quantity}</div>
+                <div class="checkout-item-line-total">${item.quantity * catalogItem.price}</div>
+            </div>
+          `;
+        }
+      ).join('');
+      const content = `
+        <div>You have ${cart.items.reduce((p, c) => c.quantity + p, 0)} items in your cart</div>
+        ${cartItems}
+        <div>Total cost: <span class="checkout-total-cost">${cart.items.reduce((p, c) => (c.quantity * catalog.getItem(c.itemId).price) + p, 0)}</span></div>
+      `;
+      document.getElementById('checkout-detail').innerHTML = content;
+    }
+  };
+
+  function goto(newLocation) {
+    window.location.hash = newLocation;
+  }
+
+  const sections = {
+    catalog: {render: catalog.render},
+    cart: {render: cart.render},
+    checkout: {render: checkout.render},
+    shipping: {},
+    reviews: {},
+    done: {}
+  };
+
+  window.addEventListener('hashchange', function () {
+    console.log('B new location hash: ' + window.location.hash);
+    showCurrentLocation();
+  });
+
+  function showCurrentLocation() {
+    const {section} = parseHash();
+    if (sections.hasOwnProperty(section)) {
+      hideAll();
+      showSection(section);
+    }
+  }
+
+  function parseHash() {
+      const parsed = window.location.hash.substr(1);
+      const [section, params] = parsed.split('?');
+      return { section, params }
+  }
+
+  function hideAll() {
+    Object.keys(sections).forEach(hideSection);
+  }
+
+  function hideSection(section) {
+    document.getElementById(section).style.display = "none";
+  }
+
+  function showSection(section) {
+    document.getElementById(section).style.display = "inline";
+    if (sections[section].render !== undefined) {
+      sections[section].render();
+    }
+  }
+
+  hideAll();
+
+  // setup helpers for quick testing:
+  window.location.hash = 'catalog';
+  //window.location.hash = 'cart';
+  //cart.items.push({ itemId: "2", quantity: 3});
+  //cart.items.push({ itemId: "4", quantity: 9});
+  //window.location.hash = 'reviews';
+
+  showCurrentLocation();
+
+
+</script>
+<!-- I warned you not to look -->
+</html>
