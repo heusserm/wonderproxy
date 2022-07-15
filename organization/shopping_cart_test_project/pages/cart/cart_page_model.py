@@ -1,13 +1,3 @@
-
-#from ..page_factory import register_page_model
-
-
-# actions for page
-# get items
-# locate item by description, product id, index
-# update item (located item is an input)
-# get total cost
-
 base = 'http://localhost:8080/simple-store.html'
 
 class CartPageModel:
@@ -15,7 +5,9 @@ class CartPageModel:
         self.page = page
 
     def goto(self):
-        self.page.goto(base + '#cart')
+        if self.page.url.find(base) == -1:
+            self.page.goto(base)
+        self.page.locator('#cart-menu-item').click()
 
     def get_items(self):
         cart_items = []
@@ -29,14 +21,8 @@ class CartPageModel:
             })
         return cart_items
 
-
     def get_total_cost(self):
         return self.page.locator(".cart-total-cost").inner_text()
 
     def checkout(self):
         self.page.locator('.cart-checkout').click()
-
-# register page model
-# todo: figure out what needs to be passed in.
-# todo: figure out the factory bits later???
-# register_page_model('cart', CartPageModel)

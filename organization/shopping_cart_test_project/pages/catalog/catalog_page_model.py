@@ -6,7 +6,9 @@ class CatalogPageModel:
         self.page = page
 
     def goto(self):
-        self.page.goto(base + '#catalog')
+        if self.page.url.find(base) == -1:
+            self.page.goto(base)
+        self.page.locator('#catalog-menu-item').click()
 
     def validate_page(self):
         """Check that the browser is on the catalog page"""
